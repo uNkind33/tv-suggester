@@ -9,8 +9,11 @@ export const MIN_QUERY_LENGTH = 2
 /** Данные для экрана: debounce -> запрос с отменой -> { shows, status, error, retry }. */
 export function useShows() {
   const query = useSearchStore((state) => state.query)
-  const debounced = useDebouncedValue(query.trim(), DEBOUNCE_MS)
-  const key = debounced.length >= MIN_QUERY_LENGTH ? debounced.toLowerCase() : null
+  const trimmed = query.trim()
+  const debounced = useDebouncedValue(trimmed, DEBOUNCE_MS)
+  // короткий/очищенный запрос сбрасывает выдачу сразу, не дожидаясь debounce
+  const isValid = trimmed.length >= MIN_QUERY_LENGTH && debounced.length >= MIN_QUERY_LENGTH
+  const key = isValid ? debounced.toLowerCase() : null
 
   const { data, status, error, retry } = useAsync(key, (signal) =>
     searchShows(debounced, signal),

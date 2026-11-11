@@ -1,11 +1,10 @@
 import type { Show } from '../../api/types'
+import type { AsyncStatus } from '../../hooks/useAsync'
 import { useSearchStore } from '../../store/searchStore'
-
-type Status = 'idle' | 'loading' | 'success' | 'error'
 
 export type ListView = 'hint' | 'skeleton' | 'error' | 'empty' | 'list'
 
-export function usePresenter(shows: Show[], status: Status) {
+export function usePresenter(shows: Show[], status: AsyncStatus) {
   const query = useSearchStore((state) => state.query.trim())
 
   let view: ListView = 'list'

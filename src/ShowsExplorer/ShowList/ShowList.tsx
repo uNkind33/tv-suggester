@@ -1,4 +1,5 @@
 import type { Show } from '../../api/types'
+import type { AsyncStatus } from '../../hooks/useAsync'
 import ShowCard from './ShowCard/ShowCard'
 import ShowListSkeleton from './ShowListSkeleton/ShowListSkeleton'
 import styles from './ShowList.module.css'
@@ -7,7 +8,7 @@ import { usePresenter } from './usePresenter'
 
 interface Props {
   shows: Show[]
-  status: 'idle' | 'loading' | 'success' | 'error'
+  status: AsyncStatus
   error: Error | null
   onRetry: () => void
 }

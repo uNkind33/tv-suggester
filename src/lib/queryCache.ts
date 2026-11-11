@@ -6,3 +6,7 @@ export const getCached = <T>(key: string): T | undefined => cache.get(key) as T 
 export const setCached = <T>(key: string, value: T): void => {
   cache.set(key, value)
 }
+
+export const deleteCached = (key: string): void => {
+  cache.delete(key)
+}
