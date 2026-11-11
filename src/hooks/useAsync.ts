@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useReducer, useState } from 'react'
-import { isAbortError } from '../api/httpClient'
-import { getCached, setCached } from '../lib/queryCache'
+import { isAbortError } from '@/api/httpClient'
+import { deleteCached, getCached, setCached } from '@/lib/queryCache'
 
-type Status = 'idle' | 'loading' | 'success' | 'error'
+export type AsyncStatus = 'idle' | 'loading' | 'success' | 'error'
 
 interface State<T> {
-  status: Status
+  status: AsyncStatus
   data: T | undefined
   error: Error | null
 }
@@ -50,7 +50,7 @@ export function useAsync<T>(
       dispatch({ type: 'idle' })
       return
     }
-    const cached = attempt === 0 ? getCached<T>(key) : undefined
+    const cached = getCached<T>(key)
     if (cached !== undefined) {
       dispatch({ type: 'success', data: cached })
       return
@@ -70,10 +70,13 @@ export function useAsync<T>(
 
     return () => controller.abort()
     // fetcher намеренно вне зависимостей: запрос определяется ключом
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // oxlint-disable-next-line react/exhaustive-deps
   }, [key, attempt])
 
-  const retry = useCallback(() => setAttempt((n) => n + 1), [])
+  const retry = useCallback(() => {
+    if (key !== null) deleteCached(key) // повтор всегда идёт в сеть, а не в кэш
+    setAttempt((n) => n + 1)
+  }, [key])
 
   return { ...state, retry }
 }
