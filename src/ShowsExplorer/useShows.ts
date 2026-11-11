@@ -1,7 +1,7 @@
-import { searchShows } from '../api/tvmaze'
-import { useAsync } from '../hooks/useAsync'
-import { useDebouncedValue } from '../hooks/useDebouncedValue'
-import { useSearchStore } from '../store/searchStore'
+import { searchShows } from '@/api/tvmaze'
+import { useAsync } from '@/hooks/useAsync'
+import { useDebouncedValue } from '@/hooks/useDebouncedValue'
+import { useSearchStore } from '@/store/searchStore'
 
 export const DEBOUNCE_MS = 400
 export const MIN_QUERY_LENGTH = 2

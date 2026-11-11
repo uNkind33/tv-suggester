@@ -1,4 +1,4 @@
-import { useSearchStore } from '../../store/searchStore'
+import { useSearchStore } from '@/store/searchStore'
 
 export function usePresenter() {
   const query = useSearchStore((state) => state.query)

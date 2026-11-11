@@ -1,4 +1,4 @@
-import { useSearchStore } from '../../store/searchStore'
+import { useSearchStore } from '@/store/searchStore'
 
 export function usePresenter() {
   const genre = useSearchStore((state) => state.genre)

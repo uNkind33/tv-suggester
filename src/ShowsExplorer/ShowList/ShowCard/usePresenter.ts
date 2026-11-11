@@ -1,4 +1,4 @@
-import type { Show } from '../../../api/types'
+import type { Show } from '@/api/types'
 
 export function usePresenter(show: Show) {
   const rating = show.rating.average

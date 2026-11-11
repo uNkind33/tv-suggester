@@ -1,5 +1,5 @@
-import type { Show } from '../../api/types'
-import type { AsyncStatus } from '../../hooks/useAsync'
+import type { Show } from '@/api/types'
+import type { AsyncStatus } from '@/hooks/useAsync'
 import ShowCard from './ShowCard/ShowCard'
 import ShowListSkeleton from './ShowListSkeleton/ShowListSkeleton'
 import styles from './ShowList.module.css'

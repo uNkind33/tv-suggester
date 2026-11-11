@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
-import { extractGenres, filterByGenre } from '../lib/genres'
-import { pageCount, paginate } from '../lib/paginate'
-import { useSearchStore } from '../store/searchStore'
+import { extractGenres, filterByGenre } from '@/lib/genres'
+import { pageCount, paginate } from '@/lib/paginate'
+import { useSearchStore } from '@/store/searchStore'
 import { useShows } from './useShows'
 
 export function usePresenter() {

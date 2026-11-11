@@ -1,4 +1,4 @@
-import type { Show } from '../api/types'
+import type { Show } from '@/api/types'
 
 export function extractGenres(shows: Show[]): string[] {
   const unique = new Set(shows.flatMap((show) => show.genres))

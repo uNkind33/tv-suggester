@@ -34,6 +34,8 @@ npm run lint      # oxlint
 
 ## Структура
 
+Алиас `@` указывает на `src` (`import { useSearchStore } from '@/store/searchStore'`); настроен в `tsconfig.app.json` и `vite.config.ts`.
+
 ```
 src/
   main.tsx, App.tsx          точка входа

@@ -1,4 +1,4 @@
-import type { Show } from '../../../api/types'
+import type { Show } from '@/api/types'
 import styles from './ShowCard.module.css'
 import { usePresenter } from './usePresenter'
 

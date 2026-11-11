@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useReducer, useState } from 'react'
-import { isAbortError } from '../api/httpClient'
-import { deleteCached, getCached, setCached } from '../lib/queryCache'
+import { isAbortError } from '@/api/httpClient'
+import { deleteCached, getCached, setCached } from '@/lib/queryCache'
 
 export type AsyncStatus = 'idle' | 'loading' | 'success' | 'error'
 

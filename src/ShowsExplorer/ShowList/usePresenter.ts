@@ -1,6 +1,6 @@
-import type { Show } from '../../api/types'
-import type { AsyncStatus } from '../../hooks/useAsync'
-import { useSearchStore } from '../../store/searchStore'
+import type { Show } from '@/api/types'
+import type { AsyncStatus } from '@/hooks/useAsync'
+import { useSearchStore } from '@/store/searchStore'
 
 export type ListView = 'hint' | 'skeleton' | 'error' | 'empty' | 'list'
 
