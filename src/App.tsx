@@ -1,3 +1,5 @@
+import ShowsExplorer from './ShowsExplorer/ShowsExplorer'
+
 export default function App() {
-  return <h1>TV Suggester</h1>
+  return <ShowsExplorer />
 }

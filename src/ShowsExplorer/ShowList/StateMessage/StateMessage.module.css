@@ -1,0 +1,14 @@
+.root { padding: 48px 0; text-align: center; }
+.icon { font-size: 3rem; }
+.title { margin: 12px 0 4px; font-size: 1.3rem; }
+.text { margin: 0; color: var(--muted); }
+
+.action {
+  margin-top: 20px;
+  padding: 10px 26px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--gradient);
+  color: #fff;
+  font-weight: 600;
+}

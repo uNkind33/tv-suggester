@@ -1,0 +1,20 @@
+.root {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 64px 20px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.title {
+  margin: 0;
+  text-align: center;
+  font-size: clamp(2rem, 6vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
