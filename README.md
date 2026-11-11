@@ -16,6 +16,10 @@ npm run preview   # предпросмотр сборки
 npm run lint      # oxlint
 ```
 
+## Деплой
+
+При пуше в `main` GitHub Actions (`.github/workflows/deploy.yml`) прогоняет lint, собирает проект и публикует его на GitHub Pages: https://unkind33.github.io/tv-suggester/. Один раз нужно включить в репозитории Settings → Pages → Source: **GitHub Actions**. В CI `vite.config.ts` ставит `base: '/tv-suggester/'`, локально `base` обычный.
+
 ## Что умеет приложение
 
 - Поиск по названию с debounce 400 мс; запрос отправляется от 2 символов.
