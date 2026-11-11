@@ -17,22 +17,22 @@ export default function ShowList({ shows, status, error, onRetry }: Props) {
   const { view, query, dimmed } = usePresenter(shows, status)
 
   if (view === 'hint') {
-    return <StateMessage icon="🍿" title="Начните вводить название" text="Минимум 2 символа." />
+    return <StateMessage icon="🍿" title="Start typing a title" text="At least 2 characters." />
   }
   if (view === 'skeleton') return <ShowListSkeleton />
   if (view === 'error') {
     return (
       <StateMessage
         icon="📡"
-        title="Не удалось загрузить"
-        text={error?.message ?? 'Что-то пошло не так.'}
-        actionLabel="Повторить"
+        title="Couldn't load shows"
+        text={error?.message ?? 'Something went wrong.'}
+        actionLabel="Retry"
         onAction={onRetry}
       />
     )
   }
   if (view === 'empty') {
-    return <StateMessage icon="🔎" title="Ничего не нашли" text={`По запросу «${query}» пусто.`} />
+    return <StateMessage icon="🔎" title="Nothing found" text={`No results for “${query}”.`} />
   }
 
   return (

@@ -14,12 +14,12 @@ export default function SearchBar({ loading }: Props) {
         className={styles.input}
         value={query}
         onChange={onChange}
-        placeholder="Найти сериал: murder, banana, breaking…"
-        aria-label="Поиск сериала"
+        placeholder="Search shows: murder, banana, breaking…"
+        aria-label="Search shows"
         autoFocus
       />
       {query && (
-        <button className={styles.clear} onClick={onClear} aria-label="Очистить">
+        <button className={styles.clear} onClick={onClear} aria-label="Clear">
           ✕
         </button>
       )}

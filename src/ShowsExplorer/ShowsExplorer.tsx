@@ -10,7 +10,7 @@ export default function ShowsExplorer() {
 
   return (
     <main className={styles.root}>
-      <h1 className={styles.title}>Что смотрим сегодня?</h1>
+      <h1 className={styles.title}>What are we watching today?</h1>
       <SearchBar loading={status === 'loading'} />
       <Genres genres={genres} />
       <ShowList shows={visibleShows} status={status} error={error} onRetry={retry} />

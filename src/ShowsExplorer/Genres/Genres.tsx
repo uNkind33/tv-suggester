@@ -12,7 +12,7 @@ export default function Genres({ genres }: Props) {
 
   return (
     <div className={styles.root}>
-      <GenreChip label="Все" active={activeGenre === null} onClick={resetGenre} />
+      <GenreChip label="All" active={activeGenre === null} onClick={resetGenre} />
       {genres.map((genre) => (
         <GenreChip
           key={genre}

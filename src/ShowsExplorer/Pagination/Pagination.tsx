@@ -10,7 +10,7 @@ export default function Pagination({ totalPages }: Props) {
   if (totalPages <= 1) return null
 
   return (
-    <nav className={styles.root} aria-label="Страницы">
+    <nav className={styles.root} aria-label="Pages">
       <button className={styles.btn} disabled={!hasPrev} onClick={() => goTo(page - 1)}>
         ‹
       </button>
