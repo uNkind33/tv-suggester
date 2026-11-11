@@ -1,5 +1,7 @@
 # Simple Architecture — «Что смотрим сегодня?»
 
+Правила для ИИ-ассистента лежат в [CLAUDE.md](CLAUDE.md).
+
 Учебный проект: поиск сериалов через [TVMaze API](https://www.tvmaze.com/api) с фильтром по жанрам и постраничной навигацией. Главная цель — не сам экран, а строгая архитектура. Правила описаны в [ARCHITECTURE.md](ARCHITECTURE.md).
 
 Стек: React 19, TypeScript 7, Vite 8, Zustand, CSS Modules, Oxlint.
@@ -17,6 +19,7 @@ npm run lint      # oxlint
 ## Что умеет приложение
 
 - Поиск по названию с debounce 400 мс; запрос отправляется от 2 символов.
+- Очистка поля или запрос короче 2 символов сбрасывают выдачу сразу, без ожидания debounce.
 - Предыдущий запрос отменяется (`AbortController`), поэтому ответы не приходят «не в том порядке».
 - Кэш ответов в памяти: повторный запрос с тем же текстом не ходит в сеть.
 - Фильтр по жанрам: список жанров строится из найденных сериалов, повторный клик снимает фильтр.
@@ -49,15 +52,15 @@ src/
     useShows.ts                debounce -> useAsync -> { shows, status, error, retry }
     SearchBar/                 поле поиска
     Genres/                    список жанров
-      GenreChip/                 одна кнопка-жанр
+      GenreChip/                 одна кнопка-жанр (+ usePresenter)
     ShowList/                  сетка карточек и состояния
-      ShowCard/                  карточка сериала
+      ShowCard/                  карточка сериала (+ usePresenter)
       ShowListSkeleton/          скелетон загрузки
       StateMessage/              сообщение (подсказка, ошибка, пусто)
     Pagination/                переключение страниц
 ```
 
-У каждого компонента своя папка: `Name.tsx` (View), `Name.module.css` и при необходимости `usePresenter.ts`.
+У каждого компонента своя папка: `Name.tsx` (View), `Name.module.css` и `usePresenter.ts`, если есть что готовить (у `ShowListSkeleton` и `StateMessage` логики нет, поэтому presenter не создан).
 
 ## Как устроены слои
 
@@ -83,7 +86,7 @@ SearchBar -> searchStore (query)
 Состояние поиска: `query`, `genre`, `page`. `setQuery` сбрасывает жанр и страницу, `setGenre` сбрасывает страницу.
 
 ### hooks/
-- `useAsync(key, fetcher)` — самописный аналог `useQuery`. `key === null` — запроса нет (`idle`). Возвращает `{ status, data, error, retry }`, где `status` — `idle | loading | success | error`. Старые данные остаются на экране, пока грузятся новые. Запрос отменяется при смене ключа и размонтировании. `fetcher` намеренно не входит в зависимости эффекта: запрос определяется ключом.
+- `useAsync(key, fetcher)` — самописный аналог `useQuery`. `key === null` — запроса нет (`idle`). Возвращает `{ status, data, error, retry }`, где `status` — `idle | loading | success | error`. `retry` всегда идёт в сеть (запись в кэше сбрасывается). Старые данные остаются на экране, пока грузятся новые. Запрос отменяется при смене ключа и размонтировании. `fetcher` намеренно не входит в зависимости эффекта: запрос определяется ключом.
 - `useDebouncedValue(value, delayMs)` — значение, которое обновляется после паузы.
 
 ### lib/
