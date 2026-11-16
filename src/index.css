@@ -1,10 +1,12 @@
 :root {
   color-scheme: dark;
   --bg: #0b0b12;
-  --surface: #151522;
-  --surface-hover: #1d1d30;
+  --surface: #1a1a2c;
+  --surface-hover: #26263f;
   --text: #f2f2f8;
-  --muted: #8d8da8;
+  --text-soft: #d3d3e8;
+  --muted: #aaaac6;
+  --border: rgb(255 255 255 / 20%);
   --pink: #ff4d8d;
   --violet: #7c5cff;
   --gold: #ffc857;

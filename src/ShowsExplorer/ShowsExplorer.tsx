@@ -15,8 +15,10 @@ export default function ShowsExplorer() {
         <FavoritesButton />
       </div>
       <h1 className={styles.title}>What are we watching today?</h1>
-      <SearchBar loading={isLoading} />
-      <Genres genres={genres} />
+      <div className={styles.controls}>
+        <SearchBar loading={isLoading} />
+        <Genres genres={genres} />
+      </div>
       <ShowList shows={visibleShows} status={status} error={error} onRetry={retry} />
       <Pagination totalPages={totalPages} />
     </main>
