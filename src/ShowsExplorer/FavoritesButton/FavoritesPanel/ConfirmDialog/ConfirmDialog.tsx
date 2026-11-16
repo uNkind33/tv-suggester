@@ -8,12 +8,18 @@ interface Props {
 }
 
 export default function ConfirmDialog({ count, onConfirm, onCancel }: Props) {
-  const { title } = usePresenter(count, onCancel)
+  const { dialogRef, title } = usePresenter(count, onCancel)
 
   return (
     <>
       <div className={styles.overlay} onClick={onCancel} />
-      <div className={styles.dialog} role="alertdialog" aria-modal="true" aria-labelledby="confirm-title">
+      <div
+        ref={dialogRef}
+        className={styles.dialog}
+        role="alertdialog"
+        aria-modal="true"
+        aria-labelledby="confirm-title"
+      >
         <button className={styles.close} onClick={onCancel} aria-label="Close">
           ✕
         </button>

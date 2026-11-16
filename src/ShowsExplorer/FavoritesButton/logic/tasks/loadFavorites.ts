@@ -20,7 +20,8 @@ export async function loadFavorites(): Promise<LoadFavoritesResult> {
     for (const show of Object.values(changes)) {
       if (show && !merged.some((item) => item.id === show.id)) merged.unshift(show)
     }
-    useFavoritesStore.setState({ items: merged })
+    // изменения учтены в `merged`: дальше копить их незачем
+    useFavoritesStore.setState({ items: merged, changes: {} })
     return { error: null }
   } catch (error) {
     return { error: toApiErrorCode(error) }
