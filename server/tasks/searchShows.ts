@@ -1,11 +1,9 @@
-import type { ErrorCode, Show, ShowsPage } from '@shared/api'
+import { type ErrorCode, MIN_QUERY_LENGTH, type Show, type ShowsPage } from '@shared/api'
 import { fetchShows } from '@/api/tvmaze'
 import { extractGenres, filterByGenre } from '@/lib/genres'
 import { pageCount, paginate } from '@/lib/paginate'
 import { getCached } from './getCached'
 import { toErrorCode } from './toErrorCode'
-
-export const MIN_QUERY_LENGTH = 2
 
 interface Params {
   query: string

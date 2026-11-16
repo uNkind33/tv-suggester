@@ -6,25 +6,20 @@ interface Props {
 }
 
 export default function Pagination({ totalPages }: Props) {
-  const { page, pages, goTo, hasPrev, hasNext } = usePresenter(totalPages)
-  if (totalPages <= 1) return null
+  const { isVisible, hasPrev, hasNext, goPrev, goNext, pages } = usePresenter(totalPages)
+  if (!isVisible) return null
 
   return (
     <nav className={styles.root} aria-label="Pages">
-      <button className={styles.btn} disabled={!hasPrev} onClick={() => goTo(page - 1)}>
+      <button className={styles.btn} disabled={!hasPrev} onClick={goPrev}>
         ‹
       </button>
       {pages.map((p) => (
-        <button
-          key={p}
-          className={`${styles.btn} ${p === page ? styles.active : ''}`}
-          onClick={() => goTo(p)}
-          aria-current={p === page ? 'page' : undefined}
-        >
-          {p}
+        <button key={p.value} className={styles.btn} onClick={p.goTo} aria-current={p.ariaCurrent}>
+          {p.value}
         </button>
       ))}
-      <button className={styles.btn} disabled={!hasNext} onClick={() => goTo(page + 1)}>
+      <button className={styles.btn} disabled={!hasNext} onClick={goNext}>
         ›
       </button>
     </nav>

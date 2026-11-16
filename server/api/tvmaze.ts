@@ -1,6 +1,7 @@
 import type { Show } from '@shared/api'
 
 const BASE_URL = 'https://api.tvmaze.com'
+export const REQUEST_TIMEOUT_MS = 10_000
 
 /** TVmaze ответил, но с ошибкой. Сетевой сбой приходит обычной ошибкой fetch. */
 export class TvmazeError extends Error {
@@ -26,7 +27,7 @@ const toShow = (raw: Show): Show => ({
 })
 
 async function request<T>(path: string): Promise<T> {
-  const response = await fetch(`${BASE_URL}${path}`)
+  const response = await fetch(`${BASE_URL}${path}`, { signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS) })
   if (!response.ok) throw new TvmazeError(response.status)
   return (await response.json()) as T
 }

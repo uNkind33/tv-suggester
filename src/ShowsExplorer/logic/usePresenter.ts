@@ -11,6 +11,7 @@ export function usePresenter() {
     visibleShows: data?.items ?? [],
     totalPages: data?.totalPages ?? 1,
     status,
+    isLoading: status === 'loading',
     error,
     retry: () => loadShows(),
   }

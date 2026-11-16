@@ -1,9 +1,8 @@
+import { MIN_QUERY_LENGTH } from '@shared/api'
 import { type ApiErrorCode, isAbortError, toApiErrorCode } from '@/api/httpClient'
 import { abortFetchShowsPage, fetchShowsPage } from '@/api/shows'
 import { useSearchStore } from '@/store/searchStore'
 import { useShowsStore } from '@/store/showsStore'
-
-export const MIN_QUERY_LENGTH = 2
 
 export interface LoadShowsResult {
   error: ApiErrorCode | null

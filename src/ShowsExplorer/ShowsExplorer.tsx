@@ -7,7 +7,7 @@ import styles from './ShowsExplorer.module.css'
 import { usePresenter } from './logic/usePresenter'
 
 export default function ShowsExplorer() {
-  const { genres, visibleShows, totalPages, status, error, retry } = usePresenter()
+  const { genres, visibleShows, totalPages, status, isLoading, error, retry } = usePresenter()
 
   return (
     <main className={styles.root}>
@@ -15,7 +15,7 @@ export default function ShowsExplorer() {
         <FavoritesButton />
       </div>
       <h1 className={styles.title}>What are we watching today?</h1>
-      <SearchBar loading={status === 'loading'} />
+      <SearchBar loading={isLoading} />
       <Genres genres={genres} />
       <ShowList shows={visibleShows} status={status} error={error} onRetry={retry} />
       <Pagination totalPages={totalPages} />

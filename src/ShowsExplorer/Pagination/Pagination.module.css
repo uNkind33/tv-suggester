@@ -17,7 +17,7 @@
 .btn:hover:not(:disabled) { background: var(--surface-hover); }
 .btn:disabled { opacity: 0.3; cursor: default; }
 
-.active {
+.btn[aria-current='page'] {
   border-color: transparent;
   background: var(--gradient);
   box-shadow: 0 0 18px rgb(124 92 255 / 50%);

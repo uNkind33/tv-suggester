@@ -1,11 +1,12 @@
-import type { ErrorCode } from '@shared/api'
+import { ERROR_CODES, type ErrorCode } from '@shared/api'
 
 export const API_URL = (import.meta.env.VITE_API_URL as string | undefined) ?? ''
 
 /** Что пошло не так при обращении к серверу. Текст для пользователя делает Presenter. */
 export type ApiErrorCode = ErrorCode | 'network'
 
-const SERVER_CODES: ApiErrorCode[] = ['bad-request', 'not-found', 'upstream', 'server']
+const isErrorCode = (value: unknown): value is ErrorCode =>
+  ERROR_CODES.some((code) => code === value)
 
 export class ApiError extends Error {
   code: ApiErrorCode
@@ -38,7 +39,7 @@ export async function request<T>(path: string, init?: RequestInit): Promise<T> {
   if (!response.ok) {
     const body = (await response.json().catch(() => null)) as { error?: ApiErrorCode } | null
     const code = body?.error
-    throw new ApiError(code && SERVER_CODES.includes(code) ? code : 'server')
+    throw new ApiError(isErrorCode(code) ? code : 'server')
   }
   if (response.status === 204) return undefined as T
   return (await response.json()) as T

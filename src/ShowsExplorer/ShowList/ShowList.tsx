@@ -15,10 +15,10 @@ interface Props {
 }
 
 export default function ShowList({ shows, status, error, onRetry }: Props) {
-  const { view, query, dimmed, errorText } = usePresenter(shows, status, error)
+  const { view, dimmed, hintText, emptyText, errorText } = usePresenter(shows, status, error)
 
   if (view === 'hint') {
-    return <StateMessage icon="🍿" title="Start typing a title" text="At least 2 characters." />
+    return <StateMessage icon="🍿" title="Start typing a title" text={hintText} />
   }
   if (view === 'skeleton') return <ShowListSkeleton />
   if (view === 'error') {
@@ -33,11 +33,11 @@ export default function ShowList({ shows, status, error, onRetry }: Props) {
     )
   }
   if (view === 'empty') {
-    return <StateMessage icon="🔎" title="Nothing found" text={`No results for “${query}”.`} />
+    return <StateMessage icon="🔎" title="Nothing found" text={emptyText} />
   }
 
   return (
-    <ul className={`${styles.grid} ${dimmed ? styles.dimmed : ''}`}>
+    <ul className={styles.grid} data-dimmed={dimmed}>
       {shows.map((show) => (
         <li key={show.id}>
           <ShowCard show={show} />

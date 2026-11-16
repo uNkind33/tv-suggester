@@ -1,4 +1,7 @@
-// Контракт API между frontend и backend. Единственное место, где описаны эти типы.
+// Контракт API между frontend и backend: типы и константы. Единственное место, где они описаны.
+
+/** Минимальная длина поискового запроса: клиент не шлёт короче, сервер отвечает 400. */
+export const MIN_QUERY_LENGTH = 2
 
 export interface Show {
   id: number
@@ -27,4 +30,5 @@ export interface Favorites {
 }
 
 /** Код ошибки в теле ответа `{ error }`. Текст для пользователя делает клиент. */
-export type ErrorCode = 'bad-request' | 'not-found' | 'upstream' | 'server'
+export const ERROR_CODES = ['bad-request', 'not-found', 'upstream', 'server'] as const
+export type ErrorCode = (typeof ERROR_CODES)[number]

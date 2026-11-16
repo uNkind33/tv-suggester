@@ -1,5 +1,5 @@
+import { MIN_QUERY_LENGTH } from '@shared/api'
 import { useEffect, useRef } from 'react'
-import { MIN_QUERY_LENGTH } from '@/ShowsExplorer/logic/tasks/loadShows'
 import { searchByTerm } from './tasks/searchByTerm'
 
 export const DEBOUNCE_MS = 400

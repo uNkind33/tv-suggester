@@ -6,10 +6,21 @@ export interface LoadFavoritesResult {
   error: ApiErrorCode | null
 }
 
+/**
+ * Загрузить список избранного с сервера. Пока он грузился, пользователь мог кликнуть звёздочку:
+ * такие изменения (`changes`) важнее ответа, который мог быть собран до них.
+ */
 export async function loadFavorites(): Promise<LoadFavoritesResult> {
+  useFavoritesStore.setState({ changes: {} })
   try {
     const { items } = await fetchFavorites()
-    useFavoritesStore.setState({ items })
+    const { changes } = useFavoritesStore.getState()
+
+    const merged = items.filter((show) => changes[show.id] !== null)
+    for (const show of Object.values(changes)) {
+      if (show && !merged.some((item) => item.id === show.id)) merged.unshift(show)
+    }
+    useFavoritesStore.setState({ items: merged })
     return { error: null }
   } catch (error) {
     return { error: toApiErrorCode(error) }
