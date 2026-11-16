@@ -10,5 +10,9 @@ export function getToastText({ kind, showName }: Toast): string {
       return `Couldn’t update favorites for “${showName}”`
     case 'favorites-load-error':
       return 'Couldn’t load your favorites'
+    case 'favorites-cleared':
+      return 'Favorites cleared'
+    case 'favorites-clear-error':
+      return 'Couldn’t clear your favorites'
   }
 }

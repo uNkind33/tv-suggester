@@ -5,6 +5,8 @@ const TOAST_ICONS: Record<ToastKind, string> = {
   'favorite-removed': '✕',
   'favorite-error': '!',
   'favorites-load-error': '!',
+  'favorites-cleared': '✕',
+  'favorites-clear-error': '!',
 }
 
 export const getToastIcon = (kind: ToastKind): string => TOAST_ICONS[kind]

@@ -1,3 +1,4 @@
+import ConfirmDialog from './ConfirmDialog/ConfirmDialog'
 import FavoriteRow from './FavoriteRow/FavoriteRow'
 import styles from './FavoritesPanel.module.css'
 import { usePresenter } from './logic/usePresenter'
@@ -7,7 +8,8 @@ interface Props {
 }
 
 export default function FavoritesPanel({ onClose }: Props) {
-  const { isEmpty, shows } = usePresenter(onClose)
+  const { isEmpty, shows, canClear, isConfirmOpen, askClear, cancelClear, confirmClear } =
+    usePresenter(onClose)
 
   return (
     <>
@@ -15,6 +17,11 @@ export default function FavoritesPanel({ onClose }: Props) {
       <aside className={styles.panel} role="dialog" aria-label="Favorites">
         <header className={styles.header}>
           <h2 className={styles.title}>Favorites</h2>
+          {canClear && (
+            <button className={styles.clear} onClick={askClear}>
+              Clear all
+            </button>
+          )}
           <button className={styles.close} onClick={onClose} aria-label="Close">
             ✕
           </button>
@@ -29,6 +36,9 @@ export default function FavoritesPanel({ onClose }: Props) {
           </ul>
         )}
       </aside>
+      {isConfirmOpen && (
+        <ConfirmDialog count={shows.length} onConfirm={confirmClear} onCancel={cancelClear} />
+      )}
     </>
   )
 }

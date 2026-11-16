@@ -19,3 +19,7 @@ export const saveFavorite = (show: Show, addedAt: number): void => {
 export const deleteFavorite = (id: number): void => {
   delete favorite[id]
 }
+
+export const deleteAllFavorites = (): void => {
+  for (const id of Object.keys(favorite)) delete favorite[Number(id)]
+}

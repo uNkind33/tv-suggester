@@ -1,0 +1,60 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 12;
+  background: rgb(0 0 0 / 60%);
+}
+
+.dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 13;
+  width: min(360px, calc(100% - 32px));
+  padding: 24px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgb(255 255 255 / 10%);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: 0 24px 70px rgb(0 0 0 / 60%);
+}
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--surface-hover);
+  color: var(--muted);
+  transition: color 0.2s, background 0.2s;
+}
+
+.close:hover { background: rgb(255 255 255 / 12%); color: var(--text); }
+
+.title { margin: 0 0 8px; padding-right: 36px; font-size: 1.15rem; }
+.text { margin: 0 0 22px; color: var(--muted); }
+
+.actions { display: flex; justify-content: flex-end; gap: 10px; }
+
+.cancel,
+.confirm {
+  padding: 9px 18px;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 999px;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.cancel { background: var(--surface-hover); }
+.cancel:hover { background: rgb(255 255 255 / 12%); }
+
+.confirm {
+  border-color: var(--red);
+  background: var(--red);
+  color: #fff;
+  font-weight: 600;
+}
+
+.confirm:hover { box-shadow: 0 0 18px rgb(255 84 112 / 45%); }

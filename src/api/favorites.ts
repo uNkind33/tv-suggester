@@ -9,3 +9,5 @@ export const putFavorite = (id: number) =>
 
 export const deleteFavorite = (id: number) =>
   request<void>(`/api/favorites/${id}`, { method: 'DELETE' })
+
+export const deleteAllFavorites = () => request<void>('/api/favorites', { method: 'DELETE' })

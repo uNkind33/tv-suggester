@@ -33,7 +33,7 @@ npm run lint         # oxlint
 - Предыдущий запрос отменяется (`AbortController`), поэтому ответы не приходят «не в том порядке».
 - Фильтр по жанрам и пагинация (по 3 сериала) считаются на backend; frontend просит страницу и рисует её.
 - Backend кэширует ответы TVmaze на 5 минут (`const cache = {}`): повторный запрос в этом окне не ходит во внешний API.
-- Избранное: звёздочка на карточке, кнопка со счётчиком и панель со списком; toast при добавлении и удалении. Вся логика — на backend (`const favorite = {}`).
+- Избранное: звёздочка на карточке, кнопка со счётчиком и панель со списком; toast при добавлении и удалении. При двух и больше избранных в панели есть кнопка «Clear all»: спрашивает подтверждение в модальном окне и очищает список. Вся логика — на backend (`const favorite = {}`).
 - Состояния списка: подсказка, скелетон, ошибка с кнопкой Retry, «Nothing found».
 - Смена запроса или жанра всегда возвращает на первую страницу.
 
@@ -45,6 +45,7 @@ npm run lint         # oxlint
 | GET | `/api/favorites` | `Favorites`: `items` (последние добавленные — первыми), `count` |
 | PUT | `/api/favorites/:id` | `Show`; идемпотентно, данные шоу сервер берёт у TVmaze по id |
 | DELETE | `/api/favorites/:id` | 204; если шоу нет в избранном, это не ошибка |
+| DELETE | `/api/favorites` | 204; очищает всё избранное |
 
 Ошибки: `{ error: 'bad-request' | 'not-found' | 'upstream' | 'server' }` со статусом 400 / 404 / 502 / 500. Типы контракта — `shared/api.ts`.
 
@@ -74,7 +75,7 @@ src/
     Genres/ (GenreChip/)       logic/tasks/: selectGenre
     Pagination/                logic/tasks/: goToPage
     ShowList/                  logic/: usePresenter, getErrorText; ShowCard/ (FavoriteStar/), ShowListSkeleton/, StateMessage/
-    FavoritesButton/           кнопка со счётчиком; logic/tasks/: loadFavorites; FavoritesPanel/ (FavoriteRow/)
+    FavoritesButton/           кнопка со счётчиком; logic/tasks/: loadFavorites; FavoritesPanel/ (FavoriteRow/, ConfirmDialog/; logic/tasks/: clearFavorites)
 ```
 
 У каждого компонента своя папка: `Name.tsx` (View), `Name.module.css` и `logic/` (presenter, хуки, `tasks/`), если у компонента есть логика. У `ShowListSkeleton`, `StateMessage` и `GenreChip` логики нет, поэтому `logic/` не создан.

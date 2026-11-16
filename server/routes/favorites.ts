@@ -1,14 +1,20 @@
 import { type Request, type Response, Router } from 'express'
 import { addFavorite } from '@/tasks/addFavorite'
+import { clearFavorites } from '@/tasks/clearFavorites'
 import { listFavorites } from '@/tasks/listFavorites'
 import { removeFavorite } from '@/tasks/removeFavorite'
 import { sendError } from './sendError'
 
-/** GET /api/favorites, PUT и DELETE /api/favorites/:id. */
+/** GET и DELETE /api/favorites (очистить всё), PUT и DELETE /api/favorites/:id. */
 export const favoritesRouter = Router()
 
 favoritesRouter.get('/', (_req, res) => {
   res.json(listFavorites())
+})
+
+favoritesRouter.delete('/', (_req, res) => {
+  clearFavorites()
+  res.status(204).end()
 })
 
 favoritesRouter.put('/:id', async (req, res) => {

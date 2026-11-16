@@ -47,20 +47,23 @@
 }
 .toast[data-kind='favorite-added'] .icon { background: var(--gold); color: #12121c; }
 
-.toast[data-kind='favorite-removed'] {
+.toast[data-kind='favorite-removed'],
+.toast[data-kind='favorites-cleared'] {
   border-color: var(--violet);
   --tint: rgb(124 92 255 / 16%);
   box-shadow: 0 10px 30px rgb(0 0 0 / 50%), 0 0 24px rgb(124 92 255 / 32%);
 }
 
 .toast[data-kind='favorite-error'],
-.toast[data-kind='favorites-load-error'] {
+.toast[data-kind='favorites-load-error'],
+.toast[data-kind='favorites-clear-error'] {
   border-color: var(--red);
   --tint: rgb(255 84 112 / 16%);
   box-shadow: 0 10px 30px rgb(0 0 0 / 50%), 0 0 24px rgb(255 84 112 / 32%);
 }
 .toast[data-kind='favorite-error'] .icon,
-.toast[data-kind='favorites-load-error'] .icon { background: var(--red); }
+.toast[data-kind='favorites-load-error'] .icon,
+.toast[data-kind='favorites-clear-error'] .icon { background: var(--red); }
 
 @keyframes rise {
   from { opacity: 0; transform: translateY(12px); }

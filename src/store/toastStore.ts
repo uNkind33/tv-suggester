@@ -6,6 +6,8 @@ export type ToastKind =
   | 'favorite-removed'
   | 'favorite-error'
   | 'favorites-load-error'
+  | 'favorites-cleared'
+  | 'favorites-clear-error'
 
 export interface Toast {
   /** Новый id на каждый показ: повторное одинаковое уведомление перезапускает таймер. */

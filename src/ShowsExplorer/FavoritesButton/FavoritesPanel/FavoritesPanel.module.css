@@ -16,8 +16,8 @@
   box-shadow: -20px 0 60px rgb(0 0 0 / 50%);
 }
 
-.header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-.title { margin: 0; font-size: 1.4rem; }
+.header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+.title { margin: 0; margin-right: auto; font-size: 1.4rem; }
 
 .close {
   width: 36px;
@@ -30,3 +30,15 @@
 .empty { color: var(--muted); }
 
 .list { display: flex; flex-direction: column; gap: 12px; margin: 0; padding: 0; list-style: none; }
+
+.clear {
+  padding: 6px 14px;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 999px;
+  background: var(--surface-hover);
+  color: var(--muted);
+  font-size: 0.85rem;
+  transition: color 0.2s, background 0.2s, border-color 0.2s;
+}
+
+.clear:hover { color: var(--text); border-color: var(--red); }
