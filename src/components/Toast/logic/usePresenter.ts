@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useToastStore } from '@/store/toastStore'
 import { hideToast } from '@/tasks/hideToast'
+import { getToastIcon } from './getToastIcon'
 import { getToastText } from './getToastText'
 
 export const TOAST_MS = 3000
@@ -20,6 +21,8 @@ export function usePresenter() {
   return {
     key: toastId,
     isVisible: toast !== null,
+    kind: toast?.kind,
+    icon: toast ? getToastIcon(toast.kind) : '',
     text: toast ? getToastText(toast) : '',
     close: hideToast,
   }
