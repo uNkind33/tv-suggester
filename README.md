@@ -20,7 +20,9 @@ npm run lint         # oxlint
 
 Переменные: `PORT` и `CORS_ORIGIN` — для backend; `VITE_API_URL` — адрес backend при сборке frontend (по умолчанию пусто: запросы идут на тот же origin через прокси).
 
-## Деплой
+## Проверки и деплой
+
+На каждый Pull Request GitHub Actions (`.github/workflows/ci.yml`) запускает `npm run lint` и `npm run build` (он же проверяет типы клиента и сервера), то есть ещё до мержа.
 
 При пуше в `main` GitHub Actions (`.github/workflows/deploy.yml`) прогоняет lint, собирает проект и публикует его на GitHub Pages: https://unkind33.github.io/tv-suggester/. Один раз нужно включить в репозитории Settings → Pages → Source: **GitHub Actions**. В CI `vite.config.ts` ставит `base: '/tv-suggester/'`, локально `base` обычный.
 
