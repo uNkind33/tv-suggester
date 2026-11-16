@@ -1,5 +1,5 @@
 import styles from './SearchBar.module.css'
-import { usePresenter } from './usePresenter'
+import { usePresenter } from './logic/usePresenter'
 
 interface Props {
   loading: boolean

@@ -1,5 +1,5 @@
 import styles from './Pagination.module.css'
-import { usePresenter } from './usePresenter'
+import { usePresenter } from './logic/usePresenter'
 
 interface Props {
   totalPages: number

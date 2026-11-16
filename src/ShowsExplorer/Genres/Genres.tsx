@@ -1,6 +1,6 @@
 import GenreChip from './GenreChip/GenreChip'
 import styles from './Genres.module.css'
-import { usePresenter } from './usePresenter'
+import { usePresenter } from './logic/usePresenter'
 
 interface Props {
   genres: string[]
