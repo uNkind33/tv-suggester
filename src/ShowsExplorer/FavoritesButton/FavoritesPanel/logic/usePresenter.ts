@@ -27,6 +27,7 @@ export function usePresenter(onClose: () => void) {
     setIsAsking(false)
     const result = await clearFavorites()
     showToast(result.error ? 'favorites-clear-error' : 'favorites-cleared')
+    if (!result.error) onClose()
   }
 
   return {
