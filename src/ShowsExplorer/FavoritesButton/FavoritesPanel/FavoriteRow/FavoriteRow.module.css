@@ -1,0 +1,20 @@
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px 6px 6px;
+  border-radius: 10px;
+  background: var(--surface-hover);
+}
+
+.thumb { width: 32px; height: 44px; border-radius: 5px; object-fit: cover; }
+.info { flex: 1; min-width: 0; }
+.name { margin: 0; overflow: hidden; font-weight: 600; font-size: 0.95rem; text-overflow: ellipsis; white-space: nowrap; }
+.meta { margin: 2px 0 0; color: var(--muted); font-size: 0.75rem; }
+
+.remove {
+  border: 0;
+  background: none;
+  color: #ffc857;
+  font-size: 1.4rem;
+}

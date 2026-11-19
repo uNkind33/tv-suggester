@@ -4,7 +4,8 @@
   border-radius: var(--radius);
   overflow: hidden;
   background: var(--surface);
-  box-shadow: 0 10px 30px rgb(0 0 0 / 40%);
+  border: 1px solid rgb(255 255 255 / 14%);
+  box-shadow: 0 14px 34px rgb(0 0 0 / 55%);
   transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -35,7 +36,7 @@
   position: absolute;
   inset: auto 0 0 0;
   padding: 60px 16px 16px;
-  background: linear-gradient(transparent, rgb(11 11 18 / 95%));
+  background: linear-gradient(transparent, rgb(8 8 14 / 96%) 70%);
 }
 
 .name { margin: 0 0 4px; font-size: 1.1rem; }

@@ -1,23 +1,24 @@
-import type { Show } from '@/api/types'
-import type { AsyncStatus } from '@/hooks/useAsync'
+import type { Show } from '@shared/api'
+import type { ApiErrorCode } from '@/api/httpClient'
+import type { AsyncStatus } from '@/store/showsStore'
 import ShowCard from './ShowCard/ShowCard'
 import ShowListSkeleton from './ShowListSkeleton/ShowListSkeleton'
 import styles from './ShowList.module.css'
 import StateMessage from './StateMessage/StateMessage'
-import { usePresenter } from './usePresenter'
+import { usePresenter } from './logic/usePresenter'
 
 interface Props {
   shows: Show[]
   status: AsyncStatus
-  error: Error | null
+  error: ApiErrorCode | null
   onRetry: () => void
 }
 
 export default function ShowList({ shows, status, error, onRetry }: Props) {
-  const { view, query, dimmed } = usePresenter(shows, status)
+  const { view, dimmed, hintText, emptyText, errorText } = usePresenter(shows, status, error)
 
   if (view === 'hint') {
-    return <StateMessage icon="🍿" title="Start typing a title" text="At least 2 characters." />
+    return <StateMessage icon="🍿" title="Start typing a title" text={hintText} />
   }
   if (view === 'skeleton') return <ShowListSkeleton />
   if (view === 'error') {
@@ -25,18 +26,18 @@ export default function ShowList({ shows, status, error, onRetry }: Props) {
       <StateMessage
         icon="📡"
         title="Couldn't load shows"
-        text={error?.message ?? 'Something went wrong.'}
+        text={errorText}
         actionLabel="Retry"
         onAction={onRetry}
       />
     )
   }
   if (view === 'empty') {
-    return <StateMessage icon="🔎" title="Nothing found" text={`No results for “${query}”.`} />
+    return <StateMessage icon="🔎" title="Nothing found" text={emptyText} />
   }
 
   return (
-    <ul className={`${styles.grid} ${dimmed ? styles.dimmed : ''}`}>
+    <ul className={styles.grid} data-dimmed={dimmed}>
       {shows.map((show) => (
         <li key={show.id}>
           <ShowCard show={show} />

@@ -1,24 +1,24 @@
 import GenreChip from './GenreChip/GenreChip'
 import styles from './Genres.module.css'
-import { usePresenter } from './usePresenter'
+import { usePresenter } from './logic/usePresenter'
 
 interface Props {
   genres: string[]
 }
 
 export default function Genres({ genres }: Props) {
-  const { activeGenre, selectGenre, resetGenre } = usePresenter()
-  if (genres.length === 0) return null
+  const { isVisible, isAllActive, resetGenre, chips } = usePresenter(genres)
+  if (!isVisible) return null
 
   return (
     <div className={styles.root}>
-      <GenreChip label="All" active={activeGenre === null} onClick={resetGenre} />
-      {genres.map((genre) => (
+      <GenreChip label="All" active={isAllActive} onClick={resetGenre} />
+      {chips.map((chip) => (
         <GenreChip
-          key={genre}
-          label={genre}
-          active={genre === activeGenre}
-          onClick={() => selectGenre(genre)}
+          key={chip.name}
+          label={chip.name}
+          active={chip.isActive}
+          onClick={chip.onSelect}
         />
       ))}
     </div>

@@ -1,20 +1,18 @@
 import { create } from 'zustand'
 
+// Только состояние. Зависимые изменения (новый запрос сбрасывает страницу) — в tasks.
 interface SearchState {
+  /** Текст в поле ввода, меняется на каждый символ. */
   query: string
+  /** Запрос после debounce: по нему уходит запрос на сервер. */
+  term: string
   genre: string | null
   page: number
-  setQuery: (query: string) => void
-  setGenre: (genre: string | null) => void
-  setPage: (page: number) => void
 }
 
-export const useSearchStore = create<SearchState>((set) => ({
+export const useSearchStore = create<SearchState>(() => ({
   query: '',
+  term: '',
   genre: null,
   page: 1,
-  // смена запроса или жанра всегда возвращает на первую страницу
-  setQuery: (query) => set({ query, genre: null, page: 1 }),
-  setGenre: (genre) => set({ genre, page: 1 }),
-  setPage: (page) => set({ page }),
 }))

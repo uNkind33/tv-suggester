@@ -1,4 +1,4 @@
-import { usePresenter } from './usePresenter'
+import styles from './GenreChip.module.css'
 
 interface Props {
   label: string
@@ -7,10 +7,8 @@ interface Props {
 }
 
 export default function GenreChip({ label, active, onClick }: Props) {
-  const { className } = usePresenter(active)
-
   return (
-    <button className={className} onClick={onClick} aria-pressed={active}>
+    <button className={styles.chip} onClick={onClick} aria-pressed={active}>
       {label}
     </button>
   )

@@ -1,0 +1,18 @@
+.star {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgb(255 255 255 / 15%);
+  border-radius: 50%;
+  background: rgb(11 11 18 / 65%);
+  backdrop-filter: blur(6px);
+  font-size: 1.3rem;
+  line-height: 1;
+  transition: transform 0.2s, background 0.2s, color 0.2s;
+}
+
+.star:hover { transform: scale(1.12); background: rgb(11 11 18 / 90%); }
+.star[aria-pressed='true'] { color: #ffc857; box-shadow: 0 0 16px rgb(255 200 87 / 45%); }

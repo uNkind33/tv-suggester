@@ -1,0 +1,27 @@
+name: CI
+
+# Проверки на каждый Pull Request, до мержа. Деплой — отдельно, в deploy.yml, после мержа в main.
+on:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      # tsc -b проверяет типы клиента и сервера, затем собирается клиент
+      - run: npm run build

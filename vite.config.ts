@@ -8,6 +8,11 @@ export default defineConfig({
   base: process.env.GITHUB_ACTIONS ? '/tv-suggester/' : '/',
   plugins: [react()],
   resolve: {
-    alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
+    alias: {
+      '@shared': fileURLToPath(new URL('./shared', import.meta.url)),
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+    },
   },
+  // в dev запросы к /api идут на локальный backend
+  server: { proxy: { '/api': 'http://localhost:3001' } },
 })

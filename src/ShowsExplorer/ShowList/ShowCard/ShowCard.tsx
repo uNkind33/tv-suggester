@@ -1,6 +1,7 @@
-import type { Show } from '@/api/types'
+import type { Show } from '@shared/api'
+import FavoriteStar from './FavoriteStar/FavoriteStar'
 import styles from './ShowCard.module.css'
-import { usePresenter } from './usePresenter'
+import { usePresenter } from './logic/usePresenter'
 
 interface Props {
   show: Show
@@ -11,6 +12,7 @@ export default function ShowCard({ show }: Props) {
 
   return (
     <article className={styles.card}>
+      <FavoriteStar show={show} />
       {posterUrl ? (
         <img className={styles.poster} src={posterUrl} alt={show.name} loading="lazy" />
       ) : (

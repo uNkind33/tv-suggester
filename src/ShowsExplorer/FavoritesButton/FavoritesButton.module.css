@@ -1,0 +1,13 @@
+.root { position: relative; }
+
+.btn {
+  padding: 10px 18px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: #ffc857;
+  font-weight: 600;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover { background: var(--surface-hover); box-shadow: 0 0 18px rgb(255 200 87 / 25%); }
