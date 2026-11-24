@@ -3,6 +3,9 @@
 /** Минимальная длина поискового запроса: клиент не шлёт короче, сервер отвечает 400. */
 export const MIN_QUERY_LENGTH = 2
 
+/** Самая длинная допустимая почта (RFC 5321): клиент ограничивает поле, сервер отвечает 400. */
+export const MAX_EMAIL_LENGTH = 254
+
 export interface Show {
   id: number
   name: string
@@ -29,6 +32,16 @@ export interface Favorites {
   count: number
 }
 
+/** Текущий пользователь: у нас он целиком определяется email. */
+export interface User {
+  email: string
+}
+
+/** Ответ на вход: токен клиент присылает в `Authorization: Bearer`, email показывает на экране. */
+export interface Session extends User {
+  token: string
+}
+
 /** Код ошибки в теле ответа `{ error }`. Текст для пользователя делает клиент. */
-export const ERROR_CODES = ['bad-request', 'not-found', 'upstream', 'server'] as const
+export const ERROR_CODES = ['bad-request', 'unauthorized', 'not-found', 'upstream', 'server'] as const
 export type ErrorCode = (typeof ERROR_CODES)[number]

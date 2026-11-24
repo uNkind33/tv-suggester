@@ -1,5 +1,5 @@
 import type { Show } from '@shared/api'
-import type { ApiErrorCode } from '@/api/httpClient'
+import type { ApiErrorCode } from '@/lib/apiErrorCode'
 import type { AsyncStatus } from '@/store/showsStore'
 import ShowCard from './ShowCard/ShowCard'
 import ShowListSkeleton from './ShowListSkeleton/ShowListSkeleton'

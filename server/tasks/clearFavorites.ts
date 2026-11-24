@@ -1,6 +1,6 @@
 import { deleteAllFavorites } from '@/storage/favorite'
 
-/** Очистить всё избранное. Если оно уже пустое, это не ошибка. */
-export function clearFavorites(): void {
-  deleteAllFavorites()
+/** Очистить всё избранное пользователя. Если оно уже пустое, это не ошибка. */
+export function clearFavorites(email: string): void {
+  deleteAllFavorites(email)
 }

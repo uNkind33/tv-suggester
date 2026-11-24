@@ -14,5 +14,9 @@ export function getToastText({ kind, showName }: Toast): string {
       return 'Favorites cleared'
     case 'favorites-clear-error':
       return 'Couldn’t clear your favorites'
+    case 'login-required':
+      return 'Log in to save favorites'
+    case 'session-restore-error':
+      return 'Couldn’t check your login. Reload the page to try again'
   }
 }

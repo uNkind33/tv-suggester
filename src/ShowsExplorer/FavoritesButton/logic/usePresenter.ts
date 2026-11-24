@@ -1,22 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useAuthStore } from '@/store/authStore'
 import { useFavoritesStore } from '@/store/favoritesStore'
-import { showToast } from '@/tasks/showToast'
-import { loadFavorites } from './tasks/loadFavorites'
 
 export function usePresenter() {
+  const isVisible = useAuthStore((state) => state.user !== null)
   const count = useFavoritesStore((state) => state.items.length)
   const [isOpen, setIsOpen] = useState(false)
 
-  // стартовая загрузка при появлении кнопки, а не реакция на стор
-  useEffect(() => {
-    void loadFavorites().then(({ error }) => {
-      if (error) showToast('favorites-load-error')
-    })
-  }, [])
-
+  // избранное личное: гостю кнопки нет, а список грузит начало сессии (`startSession`)
   return {
+    isVisible,
     label: `★ Favorites · ${count}`,
-    isOpen,
+    isOpen: isOpen && isVisible, // сессия кончилась при открытой панели: сама она не «всплывёт» при новом входе
     open: () => setIsOpen(true),
     close: () => setIsOpen(false),
   }

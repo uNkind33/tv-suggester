@@ -3,17 +3,18 @@ import { addFavorite } from '@/tasks/addFavorite'
 import { clearFavorites } from '@/tasks/clearFavorites'
 import { listFavorites } from '@/tasks/listFavorites'
 import { removeFavorite } from '@/tasks/removeFavorite'
+import { emailOf } from './requireUser'
 import { sendError } from './sendError'
 
-/** GET и DELETE /api/favorites (очистить всё), PUT и DELETE /api/favorites/:id. */
+/** Избранное текущего пользователя (за `requireUser`): GET и DELETE /api/favorites, PUT и DELETE /api/favorites/:id. */
 export const favoritesRouter = Router()
 
 favoritesRouter.get('/', (_req, res) => {
-  res.json(listFavorites())
+  res.json(listFavorites(emailOf(res)))
 })
 
 favoritesRouter.delete('/', (_req, res) => {
-  clearFavorites()
+  clearFavorites(emailOf(res))
   res.status(204).end()
 })
 
@@ -21,7 +22,7 @@ favoritesRouter.put('/:id', async (req, res) => {
   const id = parseId(req, res)
   if (id === null) return
 
-  const result = await addFavorite(id)
+  const result = await addFavorite(emailOf(res), id)
   if (result.error) return sendError(res, result.error)
   res.json(result.show)
 })
@@ -30,7 +31,7 @@ favoritesRouter.delete('/:id', (req, res) => {
   const id = parseId(req, res)
   if (id === null) return
 
-  removeFavorite(id)
+  removeFavorite(emailOf(res), id)
   res.status(204).end()
 })
 

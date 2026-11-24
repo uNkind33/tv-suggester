@@ -8,6 +8,8 @@ export type ToastKind =
   | 'favorites-load-error'
   | 'favorites-cleared'
   | 'favorites-clear-error'
+  | 'login-required'
+  | 'session-restore-error'
 
 export interface Toast {
   /** Новый id на каждый показ: повторное одинаковое уведомление перезапускает таймер. */

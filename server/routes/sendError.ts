@@ -3,6 +3,7 @@ import type { Response } from 'express'
 
 const ERROR_STATUS: Record<ErrorCode, number> = {
   'bad-request': 400,
+  unauthorized: 401,
   'not-found': 404,
   upstream: 502,
   server: 500,

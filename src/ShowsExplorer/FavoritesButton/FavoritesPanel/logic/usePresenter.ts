@@ -9,7 +9,8 @@ export const MIN_FAVORITES_TO_CLEAR = 2
 export function usePresenter(onClose: () => void) {
   const shows = useFavoritesStore((state) => state.items)
   const [isAsking, setIsAsking] = useState(false)
-  const canClear = shows.length >= MIN_FAVORITES_TO_CLEAR
+  const [isClearing, setIsClearing] = useState(false)
+  const canClear = shows.length >= MIN_FAVORITES_TO_CLEAR && !isClearing
   // диалог показываем, только пока есть что чистить (список мог измениться, пока он открыт)
   const isConfirmOpen = isAsking && canClear
 
@@ -25,12 +26,15 @@ export function usePresenter(onClose: () => void) {
 
   const confirmClear = async () => {
     setIsAsking(false)
+    setIsClearing(true)
     const result = await clearFavorites()
     showToast(result.error ? 'favorites-clear-error' : 'favorites-cleared')
-    if (!result.error) onClose()
+    if (result.error) setIsClearing(false)
+    else onClose()
   }
 
   return {
+    isClearing,
     isEmpty: shows.length === 0,
     shows,
     canClear,

@@ -3,7 +3,7 @@ import { useFavoritesStore } from '@/store/favoritesStore'
 import { showToast } from '@/tasks/showToast'
 import { toggleFavorite } from './tasks/toggleFavorite'
 
-/** Переключатель избранного для одного шоу: итог — в toast; «идёт запрос» общее для всех копий шоу на экране. */
+/** Переключатель избранного для одного шоу: итог — в toast (гостю — просьба войти); «идёт запрос» общее для всех копий шоу на экране. */
 export function useToggleFavorite(show: Show) {
   const isFavorite = useFavoritesStore((state) => state.items.some((item) => item.id === show.id))
   const isPending = useFavoritesStore((state) => state.pendingIds.includes(show.id))
@@ -14,6 +14,7 @@ export function useToggleFavorite(show: Show) {
     if (useFavoritesStore.getState().pendingIds.includes(show.id)) return
     const result = await toggleFavorite(show)
 
+    if (result.error === 'unauthorized') return showToast('login-required')
     if (result.error) return showToast('favorite-error', show.name)
     showToast(result.isFavorite ? 'favorite-added' : 'favorite-removed', show.name)
   }

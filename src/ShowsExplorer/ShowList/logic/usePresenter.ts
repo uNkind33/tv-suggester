@@ -1,5 +1,5 @@
 import { MIN_QUERY_LENGTH, type Show } from '@shared/api'
-import type { ApiErrorCode } from '@/api/httpClient'
+import type { ApiErrorCode } from '@/lib/apiErrorCode'
 import { useSearchStore } from '@/store/searchStore'
 import type { AsyncStatus } from '@/store/showsStore'
 import { getErrorText } from './getErrorText'
