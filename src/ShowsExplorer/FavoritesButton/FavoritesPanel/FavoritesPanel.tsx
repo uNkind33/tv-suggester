@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function FavoritesPanel({ onClose }: Props) {
-  const { isEmpty, shows, canClear, isConfirmOpen, askClear, cancelClear, confirmClear } =
+  const { isClearing, isEmpty, shows, canClear, isConfirmOpen, askClear, cancelClear, confirmClear } =
     usePresenter(onClose)
 
   return (
@@ -26,7 +26,12 @@ export default function FavoritesPanel({ onClose }: Props) {
             ✕
           </button>
         </header>
-        {isEmpty ? (
+        {isClearing ? (
+          <p className={styles.loading} role="status">
+            <span className={styles.spinner} aria-hidden="true" />
+            Clearing…
+          </p>
+        ) : isEmpty ? (
           <p className={styles.empty}>No favorites yet. Tap ☆ on a show to add it.</p>
         ) : (
           <ul className={styles.list}>
