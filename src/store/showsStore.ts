@@ -1,6 +1,6 @@
 import type { ShowsPage } from '@shared/api'
 import { create } from 'zustand'
-import type { ApiErrorCode } from '@/api/httpClient'
+import type { ApiErrorCode } from '@/lib/apiErrorCode'
 
 export type AsyncStatus = 'idle' | 'loading' | 'success' | 'error'
 

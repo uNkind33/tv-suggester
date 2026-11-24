@@ -1,5 +1,6 @@
 import { MIN_QUERY_LENGTH } from '@shared/api'
-import { type ApiErrorCode, isAbortError, toApiErrorCode } from '@/api/httpClient'
+import { isAbortError, toApiErrorCode } from '@/api/httpClient'
+import type { ApiErrorCode } from '@/lib/apiErrorCode'
 import { abortFetchShowsPage, fetchShowsPage } from '@/api/shows'
 import { useSearchStore } from '@/store/searchStore'
 import { useShowsStore } from '@/store/showsStore'

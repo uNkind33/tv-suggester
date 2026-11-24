@@ -7,7 +7,14 @@
   gap: 28px;
 }
 
-.toolbar { display: flex; justify-content: flex-end; margin-bottom: -12px; }
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-bottom: -12px;
+}
 
 .title {
   margin: 0;

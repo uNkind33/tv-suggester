@@ -3,7 +3,9 @@ import styles from './FavoritesButton.module.css'
 import { usePresenter } from './logic/usePresenter'
 
 export default function FavoritesButton() {
-  const { label, isOpen, open, close } = usePresenter()
+  const { isVisible, label, isOpen, open, close } = usePresenter()
+
+  if (!isVisible) return null
 
   return (
     <div className={styles.root}>

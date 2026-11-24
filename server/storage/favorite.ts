@@ -1,25 +1,27 @@
 import type { Show } from '@shared/api'
 
-/** Избранное в памяти процесса, одно на весь сервер. Ключ — id шоу. */
+/** Избранное в памяти процесса: email пользователя -> id шоу -> запись. */
 interface FavoriteEntry {
   show: Show
   addedAt: number
 }
 
-const favorite: Record<number, FavoriteEntry> = {}
+const favorite: Record<string, Record<number, FavoriteEntry>> = {}
 
-export const listFavoriteEntries = (): FavoriteEntry[] => Object.values(favorite)
+const of = (email: string): Record<number, FavoriteEntry> => (favorite[email] ??= {})
 
-export const findFavorite = (id: number): FavoriteEntry | undefined => favorite[id]
+export const listFavoriteEntries = (email: string): FavoriteEntry[] => Object.values(of(email))
 
-export const saveFavorite = (show: Show, addedAt: number): void => {
-  favorite[show.id] = { show, addedAt }
+export const findFavorite = (email: string, id: number): FavoriteEntry | undefined => of(email)[id]
+
+export const saveFavorite = (email: string, show: Show, addedAt: number): void => {
+  of(email)[show.id] = { show, addedAt }
 }
 
-export const deleteFavorite = (id: number): void => {
-  delete favorite[id]
+export const deleteFavorite = (email: string, id: number): void => {
+  delete of(email)[id]
 }
 
-export const deleteAllFavorites = (): void => {
-  for (const id of Object.keys(favorite)) delete favorite[Number(id)]
+export const deleteAllFavorites = (email: string): void => {
+  delete favorite[email]
 }

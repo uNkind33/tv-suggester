@@ -6,14 +6,14 @@ import { toErrorCode } from './toErrorCode'
 
 export type AddFavoriteResult = { error: null; show: Show } | { error: ErrorCode }
 
-/** Данные шоу сервер берёт у TVmaze сам (через кэш): клиенту достаточно прислать id. Повтор ничего не меняет. */
-export async function addFavorite(id: number): Promise<AddFavoriteResult> {
-  const existing = findFavorite(id)
+/** Добавить шоу в избранное пользователя. Данные шоу сервер берёт у TVmaze сам (через кэш): клиенту достаточно прислать id. Повтор ничего не меняет. */
+export async function addFavorite(email: string, id: number): Promise<AddFavoriteResult> {
+  const existing = findFavorite(email, id)
   if (existing) return { error: null, show: existing.show }
 
   try {
     const show = await getCached(`show:${id}`, () => fetchShow(id))
-    saveFavorite(show, Date.now())
+    saveFavorite(email, show, Date.now())
     return { error: null, show }
   } catch (error) {
     return { error: toErrorCode(error) }
